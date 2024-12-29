@@ -231,3 +231,9 @@ pip-selfcheck.json
 # Ignore all local history of files
 .history
 .ionide
+
+# zappa settings
+zappa_settings.json
+
+# static files
+staticfiles

@@ -44,6 +44,7 @@ class DiaryCareAPIView(APIView):
             aws_access_key_id = settings.AWS_ACCESS_KEY_ID,
             aws_secret_access_key = settings.AWS_SECRET_ACCESS_KEY
         )
+        print(settings.AWS_ACCESS_KEY_ID)
         model_id = 'amazon.titan-text-premier-v1:0'
         
         # 프롬프트 엔지니어링
