@@ -27,9 +27,30 @@ class DiaryCareAPIView(APIView):
             200: openapi.Schema(
                 type=openapi.TYPE_OBJECT,
                 properties={
-                    "generated_text": openapi.Schema(
-                        type=openapi.TYPE_STRING,
-                        description="The generated text from the model."
+                    "inputTextTokenCount": openapi.Schema(
+                        type=openapi.TYPE_INTEGER,
+                        description="The token count of the input text."
+                    ),
+                    "results": openapi.Schema(
+                        type=openapi.TYPE_ARRAY,
+                        items=openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            properties={
+                                "tokenCount": openapi.Schema(
+                                    type=openapi.TYPE_INTEGER,
+                                    description="The token count of the output text."
+                                ),
+                                "outputText": openapi.Schema(
+                                    type=openapi.TYPE_STRING,
+                                    description="The generated text from the model."
+                                ),
+                                "completionReason": openapi.Schema(
+                                    type=openapi.TYPE_STRING,
+                                    description="The reason for completion."
+                                )
+                            }
+                        ),
+                        description="List of results containing generated text and metadata."
                     )
                 },
             ),
@@ -44,7 +65,6 @@ class DiaryCareAPIView(APIView):
             aws_access_key_id = settings.AWS_ACCESS_KEY_ID,
             aws_secret_access_key = settings.AWS_SECRET_ACCESS_KEY
         )
-        print(settings.AWS_ACCESS_KEY_ID)
         model_id = 'amazon.titan-text-premier-v1:0'
         
         # 프롬프트 엔지니어링
